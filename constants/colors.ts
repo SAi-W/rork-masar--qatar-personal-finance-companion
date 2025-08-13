@@ -1,0 +1,62 @@
+export const COLORS = {
+  maroon: '#800020',
+  gold: '#FFD700',
+  black: '#000000',
+  white: '#FFFFFF',
+  gray: '#F5F5F5',
+  lightGray: '#E0E0E0',
+  darkGray: '#1A1A1A',
+  mediumGray: '#666666',
+  error: '#FF3B30',
+  success: '#34C759',
+  primary: '#800020',
+  primaryLight: '#F5E6E8',
+  background: '#F5F5F5',
+  red: '#FF3B30',
+  green: '#34C759',
+  blue: '#007AFF',
+  text: '#000000',
+  textSecondary: '#333333',
+  textLight: '#666666',
+  lightMaroon: '#F5E6E8',
+  lightBlue: '#E8F4FD',
+  lightGreen: '#E8F8E8',
+  // New clean theme colors
+  border: '#E5E7EB',
+  borderLight: '#F3F4F6',
+  placeholder: '#9CA3AF',
+  surface: '#FFFFFF',
+  surfaceSecondary: '#F9FAFB',
+};
+
+export const SHADOWS = {
+  // Clean, subtle shadows
+  subtle: {
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  medium: {
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  small: {
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 1,
+    elevation: 1,
+  },
+  brutal: {
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    elevation: 8,
+  },
+};
