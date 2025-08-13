@@ -2,11 +2,12 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "Masar",
-  slug: "masar",
+  name: "Masar: Qatar Personal Finance Companion",
+  slug: "masar-qatar-personal-finance",
   version: "1.0.0",
   orientation: "portrait",
-  icon: "./assets/icon.png",
+  icon: "./assets/images/icon.png",
+  scheme: "masar",
   userInterfaceStyle: "automatic",
   newArchEnabled: true,
   platforms: ["ios", "android", "web"],
@@ -15,36 +16,110 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   
   splash: {
-    image: "./assets/splash-icon.png",
+    image: "./assets/images/splash-icon.png",
     resizeMode: "contain",
-    backgroundColor: "#ffffff"
+    backgroundColor: "#8B0000"
   },
   
   ios: {
     supportsTablet: true,
+    bundleIdentifier: "app.rork.masar-qatar-personal-finance",
+    buildNumber: "1",
     infoPlist: {
-      NSCameraUsageDescription: "Masar uses the camera to capture receipts.",
-      NSPhotoLibraryUsageDescription: "Masar needs access to photos to attach receipts.",
-      NSPhotoLibraryAddUsageDescription: "Allow Masar to save receipt images.",
-      NSFaceIDUsageDescription: "Use Face ID to unlock Masar quickly."
+      NSPhotoLibraryUsageDescription: "Masar needs access to your photos to upload receipts and documents",
+      NSCameraUsageDescription: "Masar needs camera access to scan receipts and documents",
+      NSCalendarsUsageDescription: "Masar needs calendar access to schedule reminders and track recurring expenses",
+      NSLocationWhenInUseUsageDescription: "Masar needs location access to suggest nearby merchants and track spending patterns",
+      CFBundleDisplayName: "Masar",
+      CFBundleName: "Masar"
     }
   },
   
   android: {
-    adaptiveIcon: { 
-      foregroundImage: "./assets/adaptive-icon.png", 
-      backgroundColor: "#ffffff" 
+    adaptiveIcon: {
+      foregroundImage: "./assets/images/adaptive-icon.png",
+      backgroundColor: "#8B0000"
     },
-    permissions: ["CAMERA", "READ_MEDIA_IMAGES", "USE_BIOMETRIC"],
-    // Allow http only in dev; prod should be https-only
-    allowBackup: false
+    package: "app.rork.masar.qatar.personal.finance",
+    versionCode: 1,
+    permissions: [
+      "CAMERA",
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE",
+      "ACCESS_FINE_LOCATION",
+      "ACCESS_COARSE_LOCATION",
+      "INTERNET",
+      "ACCESS_NETWORK_STATE"
+    ],
+    intentFilters: [
+      {
+        action: "VIEW",
+        autoVerify: true,
+        data: [
+          {
+            scheme: "masar"
+          }
+        ],
+        category: [
+          "BROWSABLE",
+          "DEFAULT"
+        ]
+      }
+    ]
   },
   
-  scheme: "masar",
+  plugins: [
+    "expo-router",
+    [
+      "expo-sqlite",
+      {
+        enableFTS: true,
+        useSQLCipher: true,
+        android: {
+          enableFTS: false,
+          useSQLCipher: false
+        },
+        ios: {
+          customBuildFlags: [
+            "-DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_ENABLE_SNAPSHOT=1"
+          ]
+        }
+      }
+    ],
+    [
+      "expo-document-picker",
+      {
+        iCloudContainerEnvironment: "Production"
+      }
+    ],
+    [
+      "expo-image-picker",
+      {
+        photosPermission: "Masar needs access to your photos to upload receipts and documents."
+      }
+    ],
+    [
+      "expo-location",
+      {
+        locationAlwaysAndWhenInUsePermission: "Masar needs location access to suggest nearby merchants and track spending patterns."
+      }
+    ]
+  ],
+  
+  experiments: {
+    typedRoutes: true,
+    tsconfigPaths: true
+  },
+  
+  assetBundlePatterns: [
+    "assets/**/*"
+  ],
   
   extra: {
+    EXPO_PUBLIC_API_URL: process.env.EXPO_PUBLIC_API_URL || "https://rork-masar-qatar-personal-finance.onrender.com",
+    EXPO_PUBLIC_ENV: process.env.EXPO_PUBLIC_ENV || "production",
     eas: {
-      projectId: "your-project-id-here"
+      projectId: process.env.EAS_PROJECT_ID || "your-eas-project-id-here"
     }
   }
 });

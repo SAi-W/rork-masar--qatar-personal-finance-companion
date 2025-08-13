@@ -3,7 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "preinstall": "# node -e \"if(!/^20\\./.test(process.versions.node)){console.error('❌ Use Node 20.x (nvm use 20)');process.exit(1)}\"",
+    "preinstall": "node -e \"if(!/^20\\./.test(process.versions.node)){console.error('❌ Use Node 20.x (nvm use 20)');process.exit(1)}\"",
     "start": "expo start",
     "start:ios": "expo start --ios",
     "start:android": "expo start --android",
@@ -20,11 +20,24 @@
     "preview:ios": "eas build --platform ios --profile preview",
     "preview:android": "eas build --platform android --profile preview",
     "submit:ios": "eas submit --platform ios",
-    "submit:android": "eas submit --platform android",
-    "check:api-url": "node scripts/check-api-url.js"
+    "submit:android": "eas submit --platform android"
   },
-  "engines": {
-    "node": "20.x"
+  "engines": { 
+    "node": "20.x" 
+  },
+  "overrides": {
+    "expo": "53.0.20",
+    "expo-blur": "14.1.5",
+    "expo-constants": "17.1.7",
+    "expo-font": "13.3.2",
+    "expo-linear-gradient": "14.1.5",
+    "expo-linking": "7.1.7",
+    "expo-location": "18.1.6",
+    "expo-splash-screen": "0.30.10",
+    "expo-system-ui": "5.0.10",
+    "react-dom": "19.0.0",
+    "react-native-web": "0.20.0",
+    "@react-native-community/datetimepicker": "8.4.1"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.4",

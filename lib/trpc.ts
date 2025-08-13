@@ -2,8 +2,7 @@
 import { createTRPCReact } from "@trpc/react-query";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
-import { Platform } from 'react-native';
-import { API, TRPC_URL } from './api';
+import { API } from './api';
 import type { AppRouter } from '@/backend/trpc/app-router';
 import { secureStorage } from '@/lib/storage';
 
@@ -11,13 +10,10 @@ import { secureStorage } from '@/lib/storage';
 export const trpc = createTRPCReact<AppRouter>();
 
 // Direct tRPC client for direct calls
-// Web only guard: Use relative path when API is on same host
-const trpcUrl = Platform.OS === 'web' ? '/api/trpc' : TRPC_URL;
-
 export const trpcClient = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: trpcUrl,
+      url: `${API}/api/trpc`,
       async headers() {
         // attach session for protectedProcedure
         const token = await secureStorage.getItem('auth_token');
