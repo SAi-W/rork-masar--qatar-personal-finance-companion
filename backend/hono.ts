@@ -20,16 +20,18 @@ app.use('*', async (c, next) => {
 app.use('*', cors({
   origin: (origin) =>
     !origin ? '*' :
-    origin.endsWith('.expo.dev') ||
-    origin.endsWith('.exp.direct') ||
-    origin.includes('localhost') ||
-    origin.includes('127.0.0.1')
+    /localhost|127\.0\.0\.1|expo|ngrok|preview|rork|render\.com/i.test(origin)
       ? origin
       : 'https://rork-masar-qatar-personal-finance.onrender.com',
   allowMethods: ['GET','POST','OPTIONS'],
   allowHeaders: ['Content-Type','Authorization'],
   credentials: true,
 }));
+// help proxies cache variants properly
+app.use('*', async (c, next) => {
+  await next();
+  c.header('Vary', 'Origin');
+});
 
 // Mount tRPC router at /api/trpc
 app.use(

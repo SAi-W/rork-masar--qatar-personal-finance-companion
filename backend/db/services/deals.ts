@@ -8,7 +8,7 @@ export interface CreateDealData {
   category: string;
   amount: number;
   discount: number;
-  validUntil: Date;
+  validUntil: Date; // input from UI
   location?: string;
   imageUrl?: string;
   userId: string; // Creator of the deal
