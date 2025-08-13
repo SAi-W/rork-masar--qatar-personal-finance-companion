@@ -1,0 +1,36 @@
+{
+  "name": "masar-backend",
+  "version": "1.0.0",
+  "description": "Masar Backend API with Neon PostgreSQL",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch server.ts",
+    "build:api": "tsc -p tsconfig.json",
+    "start:api": "node dist/server.js",
+    "postinstall": "prisma generate --schema=db/schema.prisma",
+    "migrate": "prisma migrate deploy --schema=db/schema.prisma",
+    "db:push": "prisma db push --schema=db/schema.prisma",
+    "db:setup": "prisma db push --schema=db/schema.prisma",
+    "db:studio": "prisma studio --schema=db/schema.prisma"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.8.2",
+    "@hono/trpc-server": "^0.4.0",
+    "@prisma/client": "^6.13.0",
+    "@trpc/server": "^11.0.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "nanoid": "^5.1.5",
+    "prisma": "^6.13.0",
+    "superjson": "^2.2.1",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.10",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=20 <21"
+  }
+}
